@@ -1,0 +1,14 @@
+1)  1)  101.11
+    2) .111111
+    3) 1001.1101
+
+2)  1) 0 10000100 1 .00010111001000000000000
+
+3) 0.0625
+
+4) 1) the greatest denormalized number is 0 11111110 11111111111111111111111111
+     it is the largest one because sign cannot be 1 and from the exponent part cannot be fully 1s
+     otherwise the exponent then will be reserved 
+     
+    2) the smallest denormalized number is 1 00000000 000000000000000000000000000
+    
