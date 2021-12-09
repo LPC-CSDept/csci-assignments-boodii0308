@@ -1,0 +1,54 @@
+1) Convert to binary  
+    1) 5.75
+        5/ 2 = 2 with 1 left over
+        2/ 2 = 1 with 0 left over
+        1/ 2 = 0 with 1 left over 
+        in reverser order from down to up its 101 = 5 in binary
+        .75 * 2 = 1.5
+        .5 * 2 = 1 
+        from here .75 is .11 in binary 
+        combining both its 101.11        
+    2) 63/64 which is equal to 0.984375
+
+        since we don't have whole number lets start with fraction.
+        .984375 * 2 = 1.96875
+        .96875 * 2 = 1.9375
+        .9375 * 2 = 1.875
+        .875 * 2 = 1.75
+        .75 * 2 = 1.5
+        .5 * 2 = 1
+        
+        the result is .111111
+    3) 9.8125
+        9 / 2 = 4 with 1 leftover
+        4 / 2 = 2 with 0 leftover
+        2 / 2 = 1 with 0 leftover
+        1 / 2 = 0 with 1 leftover
+        in reverse from the down to up its 1001
+        .8125 * 2 = 1.625
+        .625 * 2 = 1.25
+        .25 * 2 = 0.5
+        .5 * 2 = 1
+        combining the both result is 1001.1101
+
+2)  1) converting 34.890625 into IEEE-754
+
+    first converting into binary 34 = 100010 and .890625 = 01111110110, combining both its 100010.0111110110
+    moving the decimal 5 places  = 1.000100111110110 * 2 ^5
+    add base 127 and exponent of 5 to resulting 132 ==> 10000100
+    to find mantisa use repeated division  + sign bit of 0 at front  now mantisa  = 010000100
+    now we combining all  01000010010001001111101100000000
+
+3) converting 00111101100000000000000000000000 to decimal
+     reverse the abote steps to find the mantisa, exponent, and sign bit
+    sign 0 = positive
+    exponent = 01111011 = 123
+    mantisa = 00000....000000000 * 2^123 = 0
+    result is 0.0625
+
+4) 1) The largest denormalized number has 0 exponent there for
+      01000010111111100000000000000000
+     
+    2) on the other hand the smallest normalized number has an implied 1 and exponend of 1
+        0 00001 000000000000000000000000000
+    
