@@ -5,11 +5,10 @@
 
 # Tengisbold Batsaikhan
 
-# 12/9
+# 12/17
 
 # ax^2 + bx + c
 
-#
 
 	.data
 str1:	.asciiz, "\nEnter a number for x: "
@@ -17,14 +16,14 @@ str2:	.asciiz, "\nEnter a number for a: "
 str3:	.asciiz, "\nEnter a number for b: "
 str4:	.asciiz, "\nEnter a number for c: "
 str5:	.asciiz, "ax^2 + bx + c"
-str6:	.asciiz. "\nax^2 + bx + c = "
+str6:	.asciiz, "\nax^2 + bx + c = "
 
 	.text
 	.globl main
 
 main:
 #----------PRINT ON CONSOLE-------------  
-	la	$a0, str5			# cout << str1
+	la	$a0, str5		
 	la	$a0, str1
 	li	$v0, 4
 	syscall
@@ -57,15 +56,15 @@ main:
 	syscall
 	mov.s	$f6, $f0  			
 #----------PROCESS THE CALCULATION----------
-	mul.s	$f0, $f9, $f9			
+	mul.s	$f0, $f9, $f9			#x*x
 	nop
-	mul.s	$f0, $f0, $f8
+	mul.s	$f0, $f0, $f8			#a*x^2
 	nop
-	mul.s	$f7, $f7, $f9
+	mul.s	$f7, $f7, $f9			#b*x
 	nop
-	add.s	$f0, $f0, $f7			
-	add.s	$f0, $f0, $f6
-	mov.s	$f12, $f0
+	add.s	$f0, $f0, $f7			#a*x^2 + b*x
+	add.s	$f0, $f0, $f6			#a*x^2 + b*x + c
+	mov.s	$f12, $f0				#moving value to FP register
 #----------PRINT ON CONSOLE-------------  
 	la	$a0, str6			
 	li 	$v0, 4
