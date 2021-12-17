@@ -4,44 +4,46 @@
 
 # Tengisbold Batsaikhan
 
-# 12/9
+# 12/16
 
 # convert Fahrenheit to Celsius
 
 #
 
 	.data
-prompt1:	.asciiz, "Enter an integer tempeture in Fahrenheit: "
-str1:	.asciiz, "The tempeture in Celsius is: "
-
+mgs1:	.asciiz, "Enter an integer tempeture in Fahrenheit: "
+msg2:	.asciiz, "The tempeture in Celsius is: "
+Num1:	.word 0
 	.text
 	.globl main
 
 main:
-	la	$a0, prompt1			# cout << prompt1;
+	ori $t1, 5
+	ori $t2, 9
+	div.s $s0, $t1, t2
+
+#----------PRINT ON CONSOLE-------------  
+	la	$a0, msg1			#loading address of msg 1
+	li	$v0, 4				#system call code for print_str
+	syscall
+#----------READ THE INTEGER--------------
+	li	$v0, 5				#getting  the integer
+	syscall
+	sw	$s1, Num1
+#----------PROCESS THE CALCULATION----------
+	mtc1	$s0, $s1
+	cvt.s.w	$s0, $s0
+
+	li.s	$s2, 32.0		
+	sub.s 	$s2, $s0, $s2
+	mul.s 	$f12, $s1, $s2 			
+#----------PRINT ON CONSOLE-------------  
+	la	$a0, msg2	
 	li	$v0, 4
 	syscall
-
-	li	$v0, 5				# cin >> $f0;
+	li	$v0, 2			
 	syscall
-	mtc1	$v0, $f0
-	cvt.s.w	$f0, $f0
-
-	li.s	$f1, 5.0			# $f1 = 5/9;
-	li.s	$f2, 9.0
-	div.s	$f1, $f1, $f2
-
-	li.s	$f2, 32.0			# $f2 = $f0 - 32;
-	sub.s 	$f2, $f0, $f2
-
-	mul.s 	$f12, $f1, $f2 			# $f12 = $f1 * $f2;
-
-	la	$a0, str1			# cout << str1;
-	li	$v0, 4
-	syscall
-
-	li	$v0, 2				# cout << $f12;
-	syscall
-
+#----------EXIT THE PROGRAM-------------  
 	li	$v0, 10
 	syscall
+
