@@ -16,20 +16,17 @@ main:
     syscall
 
     ori $s7, 3
-    lui $t1, 0xffff    #load upper imm to get the address of receiver
+    lui $t0, 0xffff    #load upper imm to get the address of receiver
 wait:
-    lw      $t2, 0($t1)      #to check receiver control
-    andi    $t2, $t2, 0x0001        #to check receiver control ready bit is 1 or 0
-    beq     $t2, $zero, wait
-
-    lw      $s0, 4($t2)
+    lw      $t1, 0($t0)      #to check receiver control
+    andi    $t1, $t1, 0x0001        #to check receiver control ready bit is 1 or 0
+    beq     $t1, $zero, wait
+    lw      $s0, 4($t0)
     sub      $s0, $s0, 48
     mul     $s0, $s0, 10
-    nop
-
-    add     $s1, $s1, $s1
+    add     $s1, $s1, $s0
     sub     $s7, $s7, 1
-    beq    $t9, $zero, print
+    beq     $s7, $zero, print
     nop
     
 
