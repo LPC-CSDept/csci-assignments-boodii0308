@@ -15,7 +15,7 @@ main:
     la  $a0, msg
     syscall
 
-    ori $s1, $s1, $zero
+    or $s1, $zero, $zero
     ori $s7, 3
     ori $s6, 10
     lui $t0, 0xffff    #load upper imm to get the address of receiver
@@ -27,13 +27,15 @@ wait:
     nop
 
     lw      $s0, 4($t0)
+    li      $v0, 5
+    syscall
 
     addi     $s0, $s0, -48    
-    mult     $s0, $s6
-    mflo        $s1
+    mult     $s1, $s6
+    mflo     $s1
     addu     $s1, $s1, $s0
     addi     $s7, $s7, -1
-    beqz     $s7, wait
+    bgez     $s7, wait
 
     nop
 
