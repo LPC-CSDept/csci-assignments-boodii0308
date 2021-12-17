@@ -4,11 +4,10 @@
 
 # Tengisbold Batsaikhan
 
-# 12/16
+# 12/17
 
 # convert Fahrenheit to Celsius
 
-#
 
 	.data
 msg1:	.asciiz, "Enter an integer tempeture in Fahrenheit: "
