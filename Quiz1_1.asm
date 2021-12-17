@@ -14,13 +14,13 @@
 mgs1:	.asciiz, "Enter an integer tempeture in Fahrenheit: "
 msg2:	.asciiz, "The tempeture in Celsius is: "
 Num1:	.word 0
+fl1:	.float 5.0
+fl2:	.float 9.0
+fl3:	.float 32.0
 	.text
 	.globl main
 
 main:
-	ori $t1, 5
-	ori $t2, 9
-	div.s $s0, $t1, t2
 
 #----------PRINT ON CONSOLE-------------  
 	la	$a0, msg1			#loading address of msg 1
@@ -29,14 +29,17 @@ main:
 #----------READ THE INTEGER--------------
 	li	$v0, 5				#getting  the integer
 	syscall
-	sw	$s1, Num1
 #----------PROCESS THE CALCULATION----------
-	mtc1	$s0, $s1
-	cvt.s.w	$s0, $s0
+	l.s	$f8, fl1	
+	l.s	$f9, fl2
+	div.s	$f0, $f8,$f9		#dividing 5/9
+	l.s	$f8, fl3
 
-	li.s	$s2, 32.0		
-	sub.s 	$s2, $s0, $s2
-	mul.s 	$f12, $s1, $s2 			
+	mtc1	$f1, $v0		#moving integer to FP register
+	cvt.s.w	$f1, $f1		#converting integer to single percision FP
+			
+	sub.s 	$f2, $f1,$f8 	#subtracting 32
+	mul.s 	$f12, $f1, $f2 	#multiplying by 5/9
 #----------PRINT ON CONSOLE-------------  
 	la	$a0, msg2	
 	li	$v0, 4
