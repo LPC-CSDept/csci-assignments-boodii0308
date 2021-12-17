@@ -16,7 +16,8 @@ str1:	.asciiz, "\nEnter a number for x: "
 str2:	.asciiz, "\nEnter a number for a: "
 str3:	.asciiz, "\nEnter a number for b: "
 str4:	.asciiz, "\nEnter a number for c: "
-str5:	.asciiz, "ax^2 + bx + c = "
+str5:	.asciiz, "ax^2 + bx + c"
+str6:	.asciiz. "\nax^2 + bx + c = "
 
 	.text
 	.globl main
@@ -66,13 +67,10 @@ main:
 	add.s	$f0, $f0, $f6
 	mov.s	$f12, $f0
 #----------PRINT ON CONSOLE-------------  
-	la	$a0, str5			
+	la	$a0, str6			
 	li 	$v0, 4
 	syscall
-
 	li	$v0, 2				
-	mov.s	$f12, $f0
-	nop
 	syscall
 #----------EXIT THE PROGRAM------------- 
 	li	$v0, 10
