@@ -31,7 +31,7 @@ main:
 	li.s 	$f3, 0.00001			
 #----------LOOP-------------  
 loop:
-	mov.s	$f4, $f0				#setting nee x
+	mov.s	$f4, $f0				#setting x
 
 	div.s	$f4, $f4, $f1			#x' = n/x
 	nop
@@ -39,9 +39,11 @@ loop:
 	div.s	$f4, $f4, $f2			#x' = ( x + n/x) / 2
 	nop
 	sub.s 	$f5, $f4, $f1			#x' - x
+
 	abs.s 	$f5, $f5			#taking absolute value
-	c.lt.s	$f5, $f3			#checking | x' - x | is less than f3 which is 0.00001
-	bc1t	loop
+	c.lt.s	$f5, $f3			#comparing | x' - x | is less than f3 which is 0.00001
+	mov.s 	$f1, $f4			#setting new x
+	bc1f	loop				#branch if comparison is false
 	nop
 #----------PRINT ON CONSOLE-------------
 	la	$a0, str2			
