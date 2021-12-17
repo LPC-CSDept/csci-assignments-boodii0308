@@ -12,65 +12,68 @@
 #
 
 	.data
-str1:	.asciiz, "Enter a number for x: "
-str2:	.asciiz, "Enter a number for a: "
-str3:	.asciiz, "Enter a number for b: "
-str4:	.asciiz, "Enter a number for c: "
+str1:	.asciiz, "\nEnter a number for x: "
+str2:	.asciiz, "\nEnter a number for a: "
+str3:	.asciiz, "\nEnter a number for b: "
+str4:	.asciiz, "\nEnter a number for c: "
 str5:	.asciiz, "ax^2 + bx + c = "
 
 	.text
 	.globl main
 
 main:
-	la	$a0, str1			# cout << str1
+#----------PRINT ON CONSOLE-------------  
+	la	$a0, str5			# cout << str1
+	la	$a0, str1
 	li	$v0, 4
 	syscall
-
-	li	$v0, 6				# cin >> $f1
+#----------READ THE FLOAT FOR X--------------
+	li	$v0, 6				
 	syscall
-	mov.s	$f1, $f0 			# $f1 = x
-
-	la	$a0, str2			# cout << str2
+	mov.s	$f9, $f0 			
+#----------PRINT ON CONSOLE------------- 
+	la	$a0, str2			
 	li	$v0, 4
 	syscall
-
-	li	$v0, 6				# cin >> $f2
+#----------READ THE FLOAT FOR A--------------
+	li	$v0, 6				
 	syscall
-	mov.s	$f2, $f0  			# $f2 = a
-
-	la	$a0, str3			# cout << str3
+	mov.s	$f8, $f0  			
+#----------PRINT ON CONSOLE------------- 
+	la	$a0, str3			
 	li	$v0, 4
 	syscall
-
-	li	$v0, 6				# cin >> $f3
+#----------READ THE FLOAT FOR B--------------
+	li	$v0, 6			
 	syscall
-	mov.s	$f3, $f0  			# $f3 = b
-
-	la	$a0, str4			# cout << str4
+	mov.s	$f7, $f0  			
+#----------PRINT ON CONSOLE------------- 
+	la	$a0, str4			
 	li	$v0, 4
 	syscall
-
-	li	$v0, 6				# cin >> $f4
+#----------READ THE FLOAT For C--------------
+	li	$v0, 6				
 	syscall
-	mov.s	$f4, $f0  			# $f4 = c
-
-	mul.s	$f0, $f1, $f2			# $f0 = ax
+	mov.s	$f6, $f0  			
+#----------PROCESS THE CALCULATION----------
+	mul.s	$f0, $f9, $f9			
 	nop
+	mul.s	$f0, $f0, $f8
 	nop
-	add.s	$f0, $f0, $f3			# $f0 = ax + b
-	mul.s	$f0, $f0, $f1			# $f0 = ax^2 + bx
+	mul.s	$f7, $f7, $f9
 	nop
-	nop
-	add.s	$f0, $f0, $f4			# $f0 = ax^2 + bx + c
-
-	la	$a0, str5			# cout << str5
+	add.s	$f0, $f0, $f7			
+	add.s	$f0, $f0, $f6
+	mov.s	$f12, $f0
+#----------PRINT ON CONSOLE-------------  
+	la	$a0, str5			
 	li 	$v0, 4
 	syscall
 
-	li	$v0, 2				# cout << ax^2 + bx + c
+	li	$v0, 2				
 	mov.s	$f12, $f0
 	nop
 	syscall
-
+#----------EXIT THE PROGRAM------------- 
 	li	$v0, 10
 	syscall
